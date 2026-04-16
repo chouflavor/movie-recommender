@@ -14,11 +14,11 @@ private:
 public:                 
     Movie(string t, string g, string d, int y, double r);
 
-    void display();
+    void display() const;
 
-    string getTitle();
-    double getRating();
-    int getYear();
+    string getTitle() const;
+    double getRating()const;
+    int getYear()const;
 
     void setRating(double r);
 

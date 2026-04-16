@@ -10,7 +10,7 @@ Movie::Movie(string t, string g, string d, int y, double r){
     setRating(r);
 }
 
-void Movie::display(){
+void Movie::display()const{
     cout << title << " (" << releaseYear << ") [" << genre << "] " << "평점: " << rating << endl;
 }
 
@@ -24,14 +24,14 @@ void Movie::setRating(double r){
     rating = r;
 }
 
-string Movie::getTitle(){
+string Movie::getTitle()const{
     return title;
 }
 
-double Movie::getRating(){
+double Movie::getRating()const{
     return rating;
 }
 
-int Movie::getYear(){
+int Movie::getYear()const{
     return releaseYear;
 }

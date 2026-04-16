@@ -7,5 +7,5 @@ private:
     std::vector<Movie> movies;
 public:
     void addMovie();
-    void printAll() const;
+    void printAllMovies() const;
 };

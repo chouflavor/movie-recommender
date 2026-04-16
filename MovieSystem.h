@@ -5,11 +5,11 @@
 
 class MovieSystem{
 private:
-    MovieManager movieMG;
-    RatingManager ratingMG;
-    UserManager userMG;
+    MovieManager movieMgr;
+    RatingManager ratingMgr;
+    UserManager userMgr;
     
-    void printMenu() const;
 public:
+    void printMenu() const;
     void run();
 };

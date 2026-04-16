@@ -53,3 +53,36 @@ void Movie::setYear(int year) {
         cout << "유효하지 않은 연도입니다. " << endl;
     }
 }
+
+bool Movie::operator==(const Movie& o) const{
+    return title == o.title && releaseYear == o.releaseYear;
+}
+bool Movie::operator!=(const Movie& o) const{
+    return !(*this == o);
+}
+bool Movie::operator<(const Movie& o) const {
+    double thisRating = this->getAverageRating();
+    double otherRating = o.getAverageRating();
+
+    if (thisRating != otherRating) {
+        return thisRating < otherRating;
+    }
+    
+    return this->title < o.title;
+}
+bool Movie::operator>(const Movie& o) const{
+    return o < *this;
+}
+
+bool Movie::operator<=(const Movie& o) const{
+    return !(o < *this);
+}
+
+bool Movie::operator>=(const Movie& o) const{
+    return !(*this < o);
+}
+
+ostream& operator<<(ostream& os, const Movie& m){
+    os << "[" << m.title << "] " << m.releaseYear << "년, ⭐️" << m.getAverageRating();
+    return os;
+}

@@ -17,7 +17,7 @@ int main() {
         m.display();
     }
 
-    
+    cout << "총 " << movies.size() << "편" << endl;
 
     return 0;
 }

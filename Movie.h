@@ -9,19 +9,23 @@ private:
     string title;
     string genre;
     int releaseYear;
-    double averageRating;  
+    double totalRating;    
+    int ratingCount; 
 
-public:                 
+public:  
+    Movie();               
     Movie(int id, const string& title, const string& genre, int releaseYear);
 
-    int getId() const;
-    void display() const;
 
+    int getId() const;
     string getTitle() const;
     string getGenre() const;
     double getRating()const;
     int getYear()const;
+    double getAverageRating() const;  
+    int getRatingCount() const; 
 
+    void display() const;
     void addRating(double r);
 
 };

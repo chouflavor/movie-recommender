@@ -1,18 +1,23 @@
 #include "Movie.h"
+#include <iostream>
+#include <vector>
 
 int main() {
-    Movie m1("기생충", "드라마", "봉준호", 2019, 4.8);
-    Movie m2("인터스텔라", "SF", "크리스토퍼 놀란", 2014, 4.9);
+    std::vector<Movie> movies;
 
-    m1.display();
-   
-    m2.display();
-
-
-    m1.setRating(5.0);
-    m1.setRating(6.0);   
-
-    cout << m1.getTitle() << ": " << m1.getRating() << endl;
+    movies.push_back(Movie(1, "Inception", "Sci-Fi", 2010));
+    movies.push_back(Movie(2,"Parasite", "Thriller", 2019));
+    movies.push_back(Movie(3, "Interstellar", "Sci-FI", 2014));
     
+    movies[0].addRating(4.8);
+    movies[0].addRating(4.5);
+    movies[1].addRating(5.0);
+
+    for(const Movie& m : movies){
+        m.display();
+    }
+
+    
+
     return 0;
 }

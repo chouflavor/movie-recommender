@@ -5,21 +5,23 @@ using namespace std;
 
 class Movie {
 private:
+    int id;
     string title;
     string genre;
-    string director;
     int releaseYear;
-    double rating;  
+    double averageRating;  
 
 public:                 
-    Movie(string t, string g, string d, int y, double r);
+    Movie(int id, const string& title, const string& genre, int releaseYear);
 
+    int getId() const;
     void display() const;
 
     string getTitle() const;
+    string getGenre() const;
     double getRating()const;
     int getYear()const;
 
-    void setRating(double r);
+    void addRating(double r);
 
 };

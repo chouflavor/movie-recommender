@@ -2,36 +2,41 @@
 #include <iostream>
 using namespace std;
 
-Movie::Movie(string t, string g, string d, int y, double r){
-    title = t;
-    genre = g;
-    director = d;
-    releaseYear = y;
-    setRating(r);
-}
+
+
+Movie::Movie(int id, const string& title, const string& genre, int year) : id(id), title(title), genre(genre), releaseYear(releaseYear), averageRating(0.0){}
+
 
 void Movie::display()const{
-    cout << title << " (" << releaseYear << ") [" << genre << "] " << "평점: " << rating << endl;
+    cout << id << ". " << title << " (" << releaseYear << ")" << endl;
 }
 
-void Movie::setRating(double r){
+void Movie::addRating(double r){
     if (r < 0.0){
         r = 0.0;
     }
     if (r > 5.0){
         r = 5.0;
     }
-    rating = r;
+    averageRating = r;
 }
 
-string Movie::getTitle()const{
+int Movie::getId() const{
+    return id;
+}
+
+string Movie::getTitle() const{
     return title;
 }
 
-double Movie::getRating()const{
-    return rating;
+string Movie::getGenre() const{
+    return genre;
 }
 
-int Movie::getYear()const{
+double Movie::getRating() const{
+    return averageRating;
+}
+
+int Movie::getYear() const{
     return releaseYear;
 }

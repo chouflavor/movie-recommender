@@ -1,36 +1,25 @@
 #pragma once
+#include <iostream>
 #include <string>
 using namespace std;
 
 class Movie {
 private:
-    int id;
     string title;
     string genre;
+    string director;
     int releaseYear;
-    double totalRating;    
-    int ratingCount;    
+    double rating;  
 
-public:
-    Movie();                    
-    Movie(int id, const string& title,
-          const string& genre, int year);
+public:                 
+    Movie(string t, string g, string d, int y, double r);
 
-    int getId() const;
-    string getTitle() const;
-    string getGenre() const;
-    int getReleaseYear() const;  
-    double getAverageRating() const;  
-    int getRatingCount() const; 
-    void addRating(double r);               
-    void display() const;
+    void display();
 
-    bool operator==(const Movie& o) const;
-    bool operator!=(const Movie& o) const;
-    bool operator<(const Movie& o) const;
-    bool operator>(const Movie& o) const;
-    bool operator<=(const Movie& o) const;
-    bool operator>=(const Movie& o) const;
-    
-    friend ostream& operator<<(ostream& os, const Movie& m);
+    string getTitle();
+    double getRating();
+    int getYear();
+
+    void setRating(double r);
+
 };

@@ -1,23 +1,18 @@
 #include "Movie.h"
-#include <iostream>
-using namespace std;
 
 int main() {
-    Movie m1(1, "기생충",    "드라마", 2019);
-    Movie m2(2, "인터스텔라", "SF",    2014);
-
-    m1.addRating(4.8);
-    m2.addRating(4.9);
+    Movie m1("기생충", "드라마", "봉준호", 2019, 4.8);
+    Movie m2("인터스텔라", "SF", "크리스토퍼 놀란", 2014, 4.9);
 
     m1.display();
    
     m2.display();
 
 
-    m1.addRating(5.0);
-    m1.addRating(6.0);   
+    m1.setRating(5.0);
+    m1.setRating(6.0);   
 
-    cout << m1.getTitle() << ": " << m1.getAverageRating() << endl;
+    cout << m1.getTitle() << ": " << m1.getRating() << endl;
     
     return 0;
 }

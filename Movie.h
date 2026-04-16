@@ -1,28 +1,26 @@
 #pragma once
 #include <iostream>
 #include <string>
-using namespace std;
 
 class Movie {
 private:
     int id;
-    string title;
-    string genre;
+    std::string title;
+    std::string genre;
     int releaseYear;
     double totalRating;    
     int ratingCount; 
 
 public:  
     Movie();               
-    Movie(int id, const string& title, const string& genre, int releaseYear);
+    Movie(int id, const std::string& title, const std::string& genre, int year);
 
     void setYear(int year);
 
     int getId() const;
-    string getTitle() const;
-    string getGenre() const;
-    double getRating()const;
-    int getYear()const;
+    std::string getTitle() const;
+    std::string getGenre() const;
+    int getYear() const;
     double getAverageRating() const;  
     int getRatingCount() const; 
 
@@ -36,5 +34,5 @@ public:
     bool operator<=(const Movie& o) const;
     bool operator>=(const Movie& o) const;
     
-    friend ostream& operator<<(ostream& os, const Movie& m);
+    friend std::ostream& operator<<(std::ostream& os, const Movie& m);
 };

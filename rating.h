@@ -1,9 +1,6 @@
 #pragma once
-#include <string>
 
-using namespace std;
-
-class Rating{
+class Rating {
 private:
     int userID;
     int movieID;

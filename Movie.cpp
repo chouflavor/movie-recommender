@@ -6,7 +6,9 @@ using namespace std;
 Movie::Movie(): id(0), releaseYear(0), totalRating(0.0), ratingCount(0){}
 
 Movie::Movie(int id, const std::string& title,const std::string& genre, int year): 
-    id(id), title(title), genre(genre), releaseYear(year), totalRating(0.0), ratingCount(0) {}
+    id(id), title(title), genre(genre), totalRating(0.0), ratingCount(0) {
+        setYear(year);
+    }
 
 int Movie::getId() const {
     return id; 
@@ -41,4 +43,13 @@ void Movie::display() const {
               << "  평점: " << getAverageRating()
               << " (" << ratingCount << "건)"
               << endl;
+}
+
+void Movie::setYear(int year) {
+    if (year >= 1888 && year <= 2100) {
+        releaseYear = year;
+    } 
+    else {
+        cout << "유효하지 않은 연도입니다. " << endl;
+    }
 }

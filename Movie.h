@@ -16,7 +16,8 @@ public:
     Movie();               
     Movie(int id, const string& title, const string& genre, int releaseYear);
 
-
+    void setYear(int year);
+    
     int getId() const;
     string getTitle() const;
     string getGenre() const;

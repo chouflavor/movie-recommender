@@ -18,7 +18,7 @@ Rating::Rating(int id, int mID, double score){
     else{
         userID = id;
         movieID = mID;
-        score = score;
+        this->score = score;
     }
 }
 

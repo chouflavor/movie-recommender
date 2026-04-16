@@ -19,7 +19,7 @@ int main() {
         m.display();
     }
 
-    cout << "총 " << movies.size() << "편" << endl;
+    std::cout << "총 " << movies.size() << "편" << std::endl;
 
     return 0;
 }

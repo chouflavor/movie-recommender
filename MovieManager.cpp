@@ -5,7 +5,7 @@
 using namespace std;
 
 void MovieManager::addMovie(){
-    cout << "\n--- [영화 추가 ---\n]";
+    cout << "\n--- [ 영화 추가 ]---\n]";
     
     int year;
     string title, genre;
@@ -16,7 +16,7 @@ void MovieManager::addMovie(){
     getline(cin, title);
 
     cout << "장르: ";
-    getline(cin, title);
+    getline(cin, genre);
 
     cout << "출시 연도: ";
     cin >> year;
@@ -25,7 +25,17 @@ void MovieManager::addMovie(){
 
     Movie newMovie(mId, title, genre, year);
     movies.push_back(newMovie);
+
+    cout << "영화 추가 완료! " << endl;
 }
+
 void MovieManager::printAllMovies() const{
-    cout << " ";
+    if(movies.empty()){
+        cout << "등록된 영화가 없습니다." << endl;
+        return;
+    }
+    for(const Movie& x : movies){
+            x.display();
+        }
+    cout << "총 " << movies.size() << "편" << endl;
 }

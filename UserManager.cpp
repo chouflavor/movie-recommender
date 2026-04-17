@@ -5,7 +5,7 @@
 using namespace std;
 
 void UserManager::addUser(){
-    cout << "\n--- [ 사용자 추가 ]---\n]";
+    cout << "\n--- [ 사용자 추가 ]---\n";
 
     string name, mail;
 
@@ -22,7 +22,7 @@ void UserManager::addUser(){
     User newUser(uId, name, mail);
     users.push_back(newUser);
 
-    cout << "사용자 추가 완료! " << endl;
+    cout << "사용자 추가 완료 " << endl;
 }
 
 void UserManager::printAllUsers() const{

@@ -5,14 +5,18 @@ using namespace std;
 
 void MovieSystem::printMenu() const {
     cout << "\n=== Movie Recommender ===\n";
-    cout << "\n[ 영화 ]\n";
-    cout << "1. 영화 추가\n2. 제목으로 검색\n3. 전체 목록 출력\n4. 평점순 정렬 출력\n";
-    cout << "\n[ 사용자 ]\n";
-    cout << "5. 사용자 추가\n6. 사용자 목록 출력\n";
-    cout << "\n[ 평점 ]\n";
-    cout << "7. 평점 입력\n8. 영화별 평점 보기\n";
-    cout << "\n0. 종료\n";
-    cout << "\n선택 > ";
+    
+    cout << "\n[ 영화 관리 ]\n";
+    cout << " 1. 영화 추가\n 2. 제목으로 검색\n 3. 전체 목록 출력\n 4. 평점순 정렬 출력\n";
+    
+    cout << "\n[ 사용자 관리 ]\n";
+    cout << " 5. 사용자 추가\n 6. 사용자 목록 출력\n";
+    
+    cout << "\n[ 평점 관리 ]\n";
+    cout << " 7. 평점 입력\n 8. 영화별 평점 보기\n";
+    
+    cout << "\n 0. 프로그램 종료\n";
+    cout << "\n 선택 > ";
 }
 void MovieSystem::run(){
     int choice = -1;

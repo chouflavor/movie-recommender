@@ -35,5 +35,5 @@ double Rating::getScore() const{
 }
 
 void Rating::display() const{
-    cout << "[" << userID << "][" << movieID << "] " << score << endl;
+    cout << " 유저 ID [" << userID << "]  |  영화 ID [" << movieID << "]  |  평점: " << score << "점" << endl;
 }

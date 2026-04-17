@@ -16,5 +16,5 @@ string User::getEmail() const{
 }
 
 void User::display() const{
-    cout << "[" << id << "], name: " << name << ", email: " << email << endl;
+    cout << " 유저 ID [" << id << "]  |  이름: " << name << "  |  이메일: " << email << endl;
 }

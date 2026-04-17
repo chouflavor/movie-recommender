@@ -38,11 +38,10 @@ void Movie::addRating(double r) {
 }
 
 void Movie::display() const {           
-    cout << id << ". " << title
-              << " (" << releaseYear << ")"
-              << "  평점: " << getAverageRating()
-              << " (" << ratingCount << "건)"
-              << endl;
+    cout << " [" << id << "] " << title 
+         << " (" << releaseYear << ")  |  장르: " << genre 
+         << "  |  평점: " << getAverageRating() 
+         << " (" << ratingCount << "건)" << endl;
 }
 
 void Movie::setYear(int year) {
@@ -83,6 +82,6 @@ bool Movie::operator>=(const Movie& o) const{
 }
 
 ostream& operator<<(ostream& os, const Movie& m){
-    os << "[" << m.title << "] " << m.releaseYear << "년, ⭐️" << m.getAverageRating();
+    os << " [" << m.title << "] " << m.releaseYear << "년, " << m.getAverageRating();
     return os;
 }

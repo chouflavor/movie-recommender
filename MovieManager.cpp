@@ -1,11 +1,12 @@
 #include "MovieManager.h"
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
 void MovieManager::addMovie(){
-    cout << "\n--- [ 영화 추가 ]---\n]";
+    cout << "\n--- [ 영화 추가 ]---\n";
     
     int year;
     string title, genre;
@@ -66,4 +67,20 @@ void MovieManager::searchByTitle() const{
     if (!found) {
         cout << "검색 결과가 없습니다." << endl;
     }
+}
+
+void MovieManager::printSortedByRating() const {
+    cout << "\n--- [ 평점순 영화 목록 ] ---\n";
+    if(movies.empty()) {
+        cout << "등록된 영화가 없습니다." << endl;
+        return;
+    }
+
+
+    sort(movies.begin(), movies.end());
+
+    for (const Movie& m : movies) {
+        m.display();
+    }
+    cout << "총 " << movies.size() << "편" << endl;
 }

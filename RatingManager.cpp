@@ -23,6 +23,8 @@ Rating RatingManager::addRating() {
     ratings.push_back(newRating);
 
     cout << "평점 추가 완료! " << endl;
+
+    return newRating;
 }
 
 void RatingManager::printRatingsByMovie() const{

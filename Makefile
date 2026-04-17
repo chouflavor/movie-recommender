@@ -1,26 +1,39 @@
-# Makefile 수정본
 CXX      = g++
 CXXFLAGS = -std=c++17 -Wall -g
-TARGET   = Movie_app
-OBJS     = main.o Movie.o user.o rating.o # 👈 변경됨
+TARGET   = movie_recommender
+OBJS     = main.o Movie.o User.o Rating.o MovieManager.o UserManager.o RatingManager.o MovieSystem.o
 
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-main.o: main.cpp Movie.h user.h rating.h
-	$(CXX) $(CXXFLAGS) -c $<
+main.o: main.cpp MovieSystem.h
+	$(CXX) $(CXXFLAGS) -c main.cpp
 
 Movie.o: Movie.cpp Movie.h
-	$(CXX) $(CXXFLAGS) -c $<
+	$(CXX) $(CXXFLAGS) -c Movie.cpp
 
-user.o: user.cpp user.h 
-	$(CXX) $(CXXFLAGS) -c $<
+User.o: User.cpp User.h
+	$(CXX) $(CXXFLAGS) -c User.cpp
 
-rating.o: rating.cpp rating.h 
-	$(CXX) $(CXXFLAGS) -c $<
+Rating.o: Rating.cpp Rating.h
+	$(CXX) $(CXXFLAGS) -c Rating.cpp
+
+MovieManager.o: MovieManager.cpp MovieManager.h Movie.h
+	$(CXX) $(CXXFLAGS) -c MovieManager.cpp
+
+UserManager.o: UserManager.cpp UserManager.h User.h
+	$(CXX) $(CXXFLAGS) -c UserManager.cpp
+
+RatingManager.o: RatingManager.cpp RatingManager.h Rating.h
+	$(CXX) $(CXXFLAGS) -c RatingManager.cpp
+
+MovieSystem.o: MovieSystem.cpp MovieSystem.h MovieManager.h RatingManager.h UserManager.h
+	$(CXX) $(CXXFLAGS) -c MovieSystem.cpp
 
 .PHONY: clean run
+
 clean:
 	rm -f $(OBJS) $(TARGET)
+
 run: $(TARGET)
 	./$(TARGET)

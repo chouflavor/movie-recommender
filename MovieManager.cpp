@@ -88,3 +88,16 @@ void MovieManager::printSortedByRating() const {
     }
     cout << "총 " << sortedMovies.size() << "편" << endl;
 }
+void MovieManager::addRatingToMovie(int mId, double score) {
+    bool found = false;
+    for (Movie& m : movies) { 
+        if (m.getId() == mId) {
+            m.addRating(score); 
+            found = true;
+            break;
+        }
+    }
+    if (!found) {
+        cout << "ID가 " << mId << "인 영화를 찾을 수 없음." << endl;
+    }
+}

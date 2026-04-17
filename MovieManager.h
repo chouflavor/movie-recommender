@@ -10,4 +10,5 @@ public:
     void printAllMovies() const;
     void searchByTitle() const;
     void printSortedByRating() const;
+    void addRatingToMovie(int mId, double score);
 };

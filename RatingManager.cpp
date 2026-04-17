@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void RatingManager::addRating() {
+Rating RatingManager::addRating() {
     
     cout << "\n--- [ 평점 입력 ] ---\n";
     

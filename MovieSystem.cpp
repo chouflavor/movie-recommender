@@ -23,12 +23,17 @@ void MovieSystem::run(){
 
         switch (choice){
             case 1: movieMgr.addMovie(); break; 
-            case 2: movieMgr.printAllMovies(); break; 
+            case 2: movieMgr.searchByTitle(); break;
             case 3: movieMgr.printAllMovies(); break;
-            case 4: cout << " "; break;
+            case 4: movieMgr.printSortedByRating(); break;
             case 5: userMgr.addUser(); break;
             case 6: userMgr.printAllUsers(); break;
-            case 7: ratingMgr.addRating(); break;
+            case 7: {
+                Rating r = ratingMgr.addRating(); 
+                movieMgr.addRatingToMovie(r.getMid(), r.getScore()); 
+                break;
+            }
+            
             case 8: ratingMgr.printRatingsByMovie(); break;
             case 0: cout << "프로그램을 종료합니다.\n"; break;
             default: cout << "잘못된 입력\n";

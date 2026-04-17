@@ -1,4 +1,4 @@
-#include "rating.h"
+#include "Rating.h"
 #include <iostream>
 
 using namespace std;

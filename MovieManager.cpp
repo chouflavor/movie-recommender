@@ -39,3 +39,31 @@ void MovieManager::printAllMovies() const{
         }
     cout << "총 " << movies.size() << "편" << endl;
 }
+
+void MovieManager::searchByTitle() const{
+    cout << "\n--- [ 제목으로 검색 ] ---\n";
+
+    if(movies.empty()) {
+        cout << "등록된 영화가 없습니다." << endl;
+        return;
+    }
+
+    string keyword;
+    cin.ignore();
+    cout << "검색할 정확한 제목 입력: ";
+    getline(cin, keyword);
+
+    bool found = false;
+
+    for (const Movie& m : movies) {
+        if (m.getTitle() == keyword) { 
+            m.display();
+            found = true;
+            break; 
+        }
+    }
+
+    if (!found) {
+        cout << "검색 결과가 없습니다." << endl;
+    }
+}

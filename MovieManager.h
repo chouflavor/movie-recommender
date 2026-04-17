@@ -8,4 +8,5 @@ private:
 public:
     void addMovie();
     void printAllMovies() const;
+    void searchByTitle() const;
 };

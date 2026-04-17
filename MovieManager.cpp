@@ -77,10 +77,14 @@ void MovieManager::printSortedByRating() const {
     }
 
 
-    sort(movies.begin(), movies.end());
+    vector<Movie> sortedMovies = movies;
 
-    for (const Movie& m : movies) {
+    sort(sortedMovies.begin(), sortedMovies.end(), [](const Movie& a, const Movie& b) {
+        return a.getAverageRating() > b.getAverageRating();
+    });
+
+    for (const Movie& m : sortedMovies) {
         m.display();
     }
-    cout << "총 " << movies.size() << "편" << endl;
+    cout << "총 " << sortedMovies.size() << "편" << endl;
 }

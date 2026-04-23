@@ -27,7 +27,7 @@ void UserManager::addUser(){
 
 void UserManager::printAllUsers() const{
     if(users.empty()){
-            cout << "등록된 사용자가 없습니다." << endl;
+        cout << "등록된 사용자가 없습니다." << endl;
         return;
     }
     for(const User& x : users){

@@ -8,4 +8,7 @@ private:
 public:
     void addUser();
     void printAllUsers() const;
+
+    void loadFromFile(const std::string& filename);
+    void saveToFile(const std::string& filename) const;
 };

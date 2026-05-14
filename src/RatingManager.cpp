@@ -1,5 +1,7 @@
 #include "RatingManager.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -40,4 +42,30 @@ void RatingManager::printRatingsByMovie() const{
     }
 
     cout << "총 " << ratings.size() << "건" << endl;
+}
+
+void RatingManager::loadFromFile(const string& filename) {
+    ifstream fin(filename);
+    if (!fin.is_open()) return;
+    string line;
+    while (getline(fin, line)) {
+        if (line.empty()) continue;
+        stringstream ss(line);
+        string uidStr, midStr, scoreStr;
+        getline(ss, uidStr, ',');
+        getline(ss, midStr, ',');
+        getline(ss, scoreStr, ',');
+        ratings.push_back(Rating(stoi(uidStr), stoi(midStr), stod(scoreStr)));
+    }
+    fin.close();
+    cout << "평점 데이터 로드 완료 (" << ratings.size() << "건)\n";
+}
+
+void RatingManager::saveToFile(const string& filename) const {
+    ofstream fout(filename);
+    if (!fout.is_open()) return;
+    for (const Rating& r : ratings) {
+        fout << r.getUid() << "," << r.getMid() << "," << r.getScore() << "\n";
+    }
+    fout.close();
 }

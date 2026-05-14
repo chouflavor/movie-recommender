@@ -1,6 +1,8 @@
 #include "UserManager.h"
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -34,4 +36,30 @@ void UserManager::printAllUsers() const{
             x.display();
         }
     cout << "총 " << users.size() << "명" << endl;
+}
+
+void UserManager::loadFromFile(const string& filename) {
+    ifstream fin(filename);
+    if (!fin.is_open()) return; // 파일 없으면 패스
+    string line;
+    while (getline(fin, line)) {
+        if (line.empty()) continue;
+        stringstream ss(line);
+        string idStr, name, email;
+        getline(ss, idStr, ',');
+        getline(ss, name, ',');
+        getline(ss, email, ',');
+        users.push_back(User(stoi(idStr), name, email));
+    }
+    fin.close();
+    cout << "유저 데이터 로드 완료 (" << users.size() << "명)\n";
+}
+
+void UserManager::saveToFile(const string& filename) const {
+    ofstream fout(filename);
+    if (!fout.is_open()) return;
+    for (const User& u : users) {
+        fout << u.getId() << "," << u.getName() << "," << u.getEmail() << "\n";
+    }
+    fout.close();
 }

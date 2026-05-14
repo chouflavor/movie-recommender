@@ -49,6 +49,10 @@ vector<int> Recommender::recommend(int targetUserId, int K, int N) const {
         }
     }
 
+    if (targetRatings.empty()) {
+        return vector<int>();
+    }
+
     
     vector<pair<int, int>> similarities;
     for (int otherUser : allUsers) {
@@ -60,7 +64,9 @@ vector<int> Recommender::recommend(int targetUserId, int K, int N) const {
         }
     }
 
-    sort(similarities.rbegin(), similarities.rend());
+    sort(similarities.begin(), similarities.end(), [](const pair<int, int>& a, const pair<int, int>& b) {
+        return a.first > b.first; 
+    });
 
  
     map<int, double> recommendedMovies; 

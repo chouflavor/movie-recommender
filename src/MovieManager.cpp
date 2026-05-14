@@ -133,7 +133,6 @@ void MovieManager::loadFromFile(const string& filename) {
     cout << "영화 데이터 로드 완료! (총 " << movies.size() << "건)" << endl;
 }
 
-// 👇 파일로 데이터 저장하기 (TODO 11)
 void MovieManager::saveToFile(const string& filename) const {
     ofstream fout(filename);
     if (!fout.is_open()) {
@@ -149,4 +148,12 @@ void MovieManager::saveToFile(const string& filename) const {
     }
     fout.close();
     cout << "영화 데이터 저장 완료: " << filename << endl;
+}
+void MovieManager::printMovieById(int id) const {
+    for (const Movie& m : movies) {
+        if (m.getId() == id) {
+            m.display(); 
+            return;
+        }
+    }
 }

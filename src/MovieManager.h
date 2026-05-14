@@ -15,4 +15,6 @@ public:
 
     void loadFromFile(const std::string& filename);
     void saveToFile(const std::string& filename) const;
+
+    void printMovieById(int id) const;
 };

@@ -54,7 +54,7 @@ void MovieSystem::run(){
                 int targetId;
                 cout << "추천을 받을 유저 ID를 입력하세요: ";
                 cin >> targetId;
-                Recommender rec(movieMgr, ratingMgr);
+                Recommender rec(ratingMgr);
 
                 vector<int> recommended = rec.recommend(targetId);
 

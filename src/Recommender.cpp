@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int Recommender::calculateSimilarity(int userA, int userB) const {
+int Recommender::Similaritycalculate(int userA, int userB) const {
     map<int, double> ratingsA;
     map<int, double> ratingsB;
 
@@ -54,7 +54,7 @@ vector<int> Recommender::recommend(int targetUserId, int K, int N) const {
     for (int otherUser : allUsers) {
         if (otherUser == targetUserId) continue; // 나 자신은 스킵
         
-        int simScore = calculateSimilarity(targetUserId, otherUser);
+        int simScore = Similaritycalculate(targetUserId, otherUser);
         if (simScore > -9999) { 
             similarities.push_back({simScore, otherUser});
         }

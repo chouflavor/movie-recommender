@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -100,4 +102,51 @@ void MovieManager::addRatingToMovie(int mId, double score) {
     if (!found) {
         cout << "ID가 " << mId << "인 영화를 찾을 수 없음." << endl;
     }
+}
+
+void MovieManager::loadFromFile(const string& filename) {
+    ifstream fin(filename);
+    if (!fin.is_open()) {
+        cout << " 저장된 영화 데이터가 없습니다." << endl;
+        return;
+    }
+
+    string line;
+    while (getline(fin, line)) {
+        if (line.empty()) continue;
+
+        stringstream ss(line);
+        string idStr, title, genre, yearStr;
+
+        getline(ss, idStr, ',');
+        getline(ss, title, ',');
+        getline(ss, genre, ',');
+        getline(ss, yearStr, ',');
+
+        int id = stoi(idStr);
+        int year = stoi(yearStr);
+
+        Movie m(id, title, genre, year);
+        movies.push_back(m);
+    }
+    fin.close();
+    cout << "영화 데이터 로드 완료! (총 " << movies.size() << "건)" << endl;
+}
+
+// 👇 파일로 데이터 저장하기 (TODO 11)
+void MovieManager::saveToFile(const string& filename) const {
+    ofstream fout(filename);
+    if (!fout.is_open()) {
+        cout << "파일 저장 실패: " << filename << endl;
+        return;
+    }
+
+    for (const Movie& m : movies) {
+        fout << m.getId() << "," 
+             << m.getTitle() << "," 
+             << m.getGenre() << "," 
+             << m.getYear() << "\n";
+    }
+    fout.close();
+    cout << "영화 데이터 저장 완료: " << filename << endl;
 }

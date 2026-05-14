@@ -19,6 +19,7 @@ void MovieSystem::printMenu() const {
     cout << "\n 선택 > ";
 }
 void MovieSystem::run(){
+    movieMgr.loadFromFile("data/movies.csv");
     int choice = -1;
 
     while(choice != 0){
@@ -39,7 +40,10 @@ void MovieSystem::run(){
             }
             
             case 8: ratingMgr.printRatingsByMovie(); break;
-            case 0: cout << "프로그램을 종료합니다.\n"; break;
+            case 0: 
+                cout << "프로그램을 종료합니다.\n";
+                movieMgr.saveToFile("data/movies.csv");
+                break;
             default: cout << "잘못된 입력\n";
         }
     }

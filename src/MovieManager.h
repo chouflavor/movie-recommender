@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "Movie.h"
 
 class MovieManager{
@@ -11,4 +12,7 @@ public:
     void searchByTitle() const;
     void printSortedByRating() const;
     void addRatingToMovie(int mId, double score);
+
+    void loadFromFile(const std::string& filename);
+    void saveToFile(const std::string& filename) const;
 };

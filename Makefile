@@ -1,34 +1,41 @@
 CXX      = g++
-CXXFLAGS = -std=c++17 -Wall -g
+
+CXXFLAGS = -std=c++17 -Wall -g -Isrc
 TARGET   = movie_recommender
-OBJS     = main.o Movie.o User.o Rating.o MovieManager.o UserManager.o RatingManager.o MovieSystem.o
+SRCDIR   = src
+
+OBJS     = $(SRCDIR)/main.o $(SRCDIR)/Movie.o $(SRCDIR)/User.o $(SRCDIR)/Rating.o \
+           $(SRCDIR)/MovieManager.o $(SRCDIR)/UserManager.o $(SRCDIR)/RatingManager.o \
+           $(SRCDIR)/MovieSystem.o
+
 
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-main.o: main.cpp MovieSystem.h
-	$(CXX) $(CXXFLAGS) -c main.cpp
 
-Movie.o: Movie.cpp Movie.h
-	$(CXX) $(CXXFLAGS) -c Movie.cpp
+$(SRCDIR)/main.o: $(SRCDIR)/main.cpp $(SRCDIR)/MovieSystem.h
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/main.cpp -o $@
 
-User.o: User.cpp User.h
-	$(CXX) $(CXXFLAGS) -c User.cpp
+$(SRCDIR)/Movie.o: $(SRCDIR)/Movie.cpp $(SRCDIR)/Movie.h
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/Movie.cpp -o $@
 
-Rating.o: Rating.cpp Rating.h
-	$(CXX) $(CXXFLAGS) -c Rating.cpp
+$(SRCDIR)/User.o: $(SRCDIR)/User.cpp $(SRCDIR)/User.h
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/User.cpp -o $@
 
-MovieManager.o: MovieManager.cpp MovieManager.h Movie.h
-	$(CXX) $(CXXFLAGS) -c MovieManager.cpp
+$(SRCDIR)/Rating.o: $(SRCDIR)/Rating.cpp $(SRCDIR)/Rating.h
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/Rating.cpp -o $@
 
-UserManager.o: UserManager.cpp UserManager.h User.h
-	$(CXX) $(CXXFLAGS) -c UserManager.cpp
+$(SRCDIR)/MovieManager.o: $(SRCDIR)/MovieManager.cpp $(SRCDIR)/MovieManager.h $(SRCDIR)/Movie.h
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/MovieManager.cpp -o $@
 
-RatingManager.o: RatingManager.cpp RatingManager.h Rating.h
-	$(CXX) $(CXXFLAGS) -c RatingManager.cpp
+$(SRCDIR)/UserManager.o: $(SRCDIR)/UserManager.cpp $(SRCDIR)/UserManager.h $(SRCDIR)/User.h
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/UserManager.cpp -o $@
 
-MovieSystem.o: MovieSystem.cpp MovieSystem.h MovieManager.h RatingManager.h UserManager.h
-	$(CXX) $(CXXFLAGS) -c MovieSystem.cpp
+$(SRCDIR)/RatingManager.o: $(SRCDIR)/RatingManager.cpp $(SRCDIR)/RatingManager.h $(SRCDIR)/Rating.h
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/RatingManager.cpp -o $@
+
+$(SRCDIR)/MovieSystem.o: $(SRCDIR)/MovieSystem.cpp $(SRCDIR)/MovieSystem.h $(SRCDIR)/MovieManager.h $(SRCDIR)/RatingManager.h $(SRCDIR)/UserManager.h
+	$(CXX) $(CXXFLAGS) -c $(SRCDIR)/MovieSystem.cpp -o $@
 
 .PHONY: clean run
 

@@ -35,7 +35,13 @@ void MovieSystem::run(){
 
     while(choice != 0){
         printMenu();
+
         cin >> choice;
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(1000, '\n');
+            choice = -1;
+        }
         switch (choice){
             case 1: movieMgr.addMovie(); break; 
             case 2: movieMgr.searchByTitle(); break;
@@ -62,7 +68,7 @@ void MovieSystem::run(){
                     cout << "데이터가 부족하여 추천할 영화가 없습니다." << endl;
                 } 
             else {
-                cout << "[" << targetId << "]님의 추천 영화" << recommended.size() << " \n";
+                cout << "[" << targetId << "]님의 추천 영화" << recommended.size() << "편 추천:" << " \n";
                 for (int mId : recommended) {
                     movieMgr.printMovieById(mId); 
                 }

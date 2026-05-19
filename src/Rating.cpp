@@ -11,13 +11,13 @@ Rating::Rating(){
 
 Rating::Rating(int id, int mID, double score){
     if (score < 0 || score > 5){
-        userID = 0;
-        movieID = 0;
-        score = 0.0;
+        this->userID = 0;
+        this->movieID = 0;
+        this->score = 0.0;
     }
     else{
-        userID = id;
-        movieID = mID;
+        this->userID = id;
+        this->movieID = mID;
         this->score = score;
     }
 }

@@ -49,7 +49,12 @@ void UserManager::loadFromFile(const string& filename) {
         getline(ss, idStr, ',');
         getline(ss, name, ',');
         getline(ss, email, ',');
-        users.push_back(User(stoi(idStr), name, email));
+        
+        try {
+            users.push_back(User(stoi(idStr), name, email));
+        } catch (const std::exception& e) {
+            cout << "경고: 유저 데이터 로드 중 형식 오류 발생. (해당 줄 건너뜀) -> " << line << endl;
+        }
     }
     fin.close();
     cout << "유저 데이터 로드 완료 (" << users.size() << "명)\n";

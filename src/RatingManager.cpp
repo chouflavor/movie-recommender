@@ -55,7 +55,12 @@ void RatingManager::loadFromFile(const string& filename) {
         getline(ss, uidStr, ',');
         getline(ss, midStr, ',');
         getline(ss, scoreStr, ',');
-        ratings.push_back(Rating(stoi(uidStr), stoi(midStr), stod(scoreStr)));
+        
+        try {
+            ratings.push_back(Rating(stoi(uidStr), stoi(midStr), stod(scoreStr)));
+        } catch (const std::exception& e) {
+            cout << "경고: 평점 데이터 로드 중 형식 오류 발생. (해당 줄 건너뜀) -> " << line << endl;
+        }
     }
     fin.close();
     cout << "평점 데이터 로드 완료 (" << ratings.size() << "건)\n";

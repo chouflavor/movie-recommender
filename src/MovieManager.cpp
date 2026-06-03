@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -123,11 +124,16 @@ void MovieManager::loadFromFile(const string& filename) {
         getline(ss, genre, ',');
         getline(ss, yearStr, ',');
 
-        int id = stoi(idStr);
-        int year = stoi(yearStr);
+        try {
+            int id = stoi(idStr);
+            int year = stoi(yearStr);
 
-        Movie m(id, title, genre, year);
-        movies.push_back(m);
+            Movie m(id, title, genre, year);
+            movies.push_back(m);
+            
+        } catch (const std::exception& e) {
+            cout << "경고: 영화 데이터 로드 중 형식 오류 발생. (해당 줄 건너뜀) -> " << line << endl;
+        }
     }
     fin.close();
     cout << "영화 데이터 로드 완료! (총 " << movies.size() << "건)" << endl;

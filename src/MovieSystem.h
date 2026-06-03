@@ -8,6 +8,11 @@ private:
     MovieManager movieMgr;
     RatingManager ratingMgr;
     UserManager userMgr;
+
+    void loadAllData();
+    void saveAllData() const;
+    void processAddRating();
+    void processRecommendation();
     
 public:
     void printMenu() const;

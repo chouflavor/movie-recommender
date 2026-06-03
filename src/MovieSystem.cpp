@@ -22,7 +22,7 @@ void MovieSystem::printMenu() const {
     cout << "\n 0. 프로그램 종료\n";
     cout << "\n 선택 > ";
 }
-void MovieSystem::run(){
+void MovieSystem::loadAllData() {
     movieMgr.loadFromFile("data/movies.csv");
     userMgr.loadFromFile("data/users.csv");
     ratingMgr.loadFromFile("data/ratings.csv");
@@ -30,6 +30,36 @@ void MovieSystem::run(){
     for (const Rating& r : ratingMgr.getRatings()) {
         movieMgr.addRatingToMovie(r.getMid(), r.getScore());
     }
+}
+void MovieSystem::saveAllData() const {
+    movieMgr.saveToFile("data/movies.csv");
+    userMgr.saveToFile("data/users.csv");
+    ratingMgr.saveToFile("data/ratings.csv");
+}
+void MovieSystem::processAddRating() {
+    Rating r = ratingMgr.addRating(); 
+    movieMgr.addRatingToMovie(r.getMid(), r.getScore()); 
+}
+void MovieSystem::processRecommendation() {
+    cout << "\n--- [ 맞춤 영화 추천 ] ---\n";
+    int targetId;
+    cout << "추천을 받을 유저 ID를 입력하세요: ";
+    cin >> targetId;
+    Recommender rec(ratingMgr);
+
+    vector<int> recommended = rec.recommend(targetId);
+
+    if (recommended.empty()) {
+        cout << "데이터가 부족하여 추천할 영화가 없습니다." << endl;
+    } else {
+        cout << "[" << targetId << "]님의 추천 영화 " << recommended.size() << "편 추천:\n";
+        for (int mId : recommended) {
+            movieMgr.printMovieById(mId); 
+        }
+    }
+}
+void MovieSystem::run(){
+    loadAllData(); 
 
     int choice = -1;
 
@@ -42,6 +72,7 @@ void MovieSystem::run(){
             cin.ignore(1000, '\n');
             choice = -1;
         }
+        
         switch (choice){
             case 1: movieMgr.addMovie(); break; 
             case 2: movieMgr.searchByTitle(); break;
@@ -49,37 +80,12 @@ void MovieSystem::run(){
             case 4: movieMgr.printSortedByRating(); break;
             case 5: userMgr.addUser(); break;
             case 6: userMgr.printAllUsers(); break;
-            case 7: {
-                Rating r = ratingMgr.addRating(); 
-                movieMgr.addRatingToMovie(r.getMid(), r.getScore()); 
-                break;
-            }
+            case 7: processAddRating(); break;        
             case 8: ratingMgr.printRatingsByMovie(); break;
-            case 9: {
-                cout << "\n--- [ 맞춤 영화 추천 ] ---\n";
-                int targetId;
-                cout << "추천을 받을 유저 ID를 입력하세요: ";
-                cin >> targetId;
-                Recommender rec(ratingMgr);
-
-                vector<int> recommended = rec.recommend(targetId);
-
-                if (recommended.empty()) {
-                    cout << "데이터가 부족하여 추천할 영화가 없습니다." << endl;
-                } 
-            else {
-                cout << "[" << targetId << "]님의 추천 영화" << recommended.size() << "편 추천:" << " \n";
-                for (int mId : recommended) {
-                    movieMgr.printMovieById(mId); 
-                }
-                }
-            }
-            break;
+            case 9: processRecommendation(); break;    
             case 0: 
                 cout << "프로그램을 종료합니다.\n";
-                movieMgr.saveToFile("data/movies.csv");
-                userMgr.saveToFile("data/users.csv");
-                ratingMgr.saveToFile("data/ratings.csv");
+                saveAllData();                         
                 break;
             default: cout << "잘못된 입력\n";
         }

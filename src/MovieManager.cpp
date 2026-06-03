@@ -57,18 +57,13 @@ void MovieManager::searchByTitle() const{
     cout << "검색할 정확한 제목 입력: ";
     getline(cin, keyword);
 
-    bool found = false;
+    auto it = find_if(movies.begin(), movies.end(), 
+                      [&keyword](const Movie& m) { return m.getTitle() == keyword; });
 
-    for (const Movie& m : movies) {
-        if (m.getTitle() == keyword) { 
-            m.display();
-            found = true;
-            break; 
-        }
-    }
-
-    if (!found) {
-        cout << "검색 결과가 없습니다." << endl;
+    if (it != movies.end()) {
+        it->display(); 
+    } else {
+        cout << "검색 결과가 없습니다." << endl; 
     }
 }
 
@@ -92,15 +87,12 @@ void MovieManager::printSortedByRating() const {
     cout << "총 " << sortedMovies.size() << "편" << endl;
 }
 void MovieManager::addRatingToMovie(int mId, double score) {
-    bool found = false;
-    for (Movie& m : movies) { 
-        if (m.getId() == mId) {
-            m.addRating(score); 
-            found = true;
-            break;
-        }
-    }
-    if (!found) {
+    auto it = find_if(movies.begin(), movies.end(), 
+                      [mId](const Movie& m) { return m.getId() == mId; });
+
+    if (it != movies.end()) {
+        it->addRating(score); 
+    } else {
         cout << "ID가 " << mId << "인 영화를 찾을 수 없음." << endl;
     }
 }
@@ -130,7 +122,7 @@ void MovieManager::loadFromFile(const string& filename) {
 
             Movie m(id, title, genre, year);
             movies.push_back(m);
-            
+
         } catch (const std::exception& e) {
             cout << "경고: 영화 데이터 로드 중 형식 오류 발생. (해당 줄 건너뜀) -> " << line << endl;
         }
@@ -156,10 +148,10 @@ void MovieManager::saveToFile(const string& filename) const {
     cout << "영화 데이터 저장 완료: " << filename << endl;
 }
 void MovieManager::printMovieById(int id) const {
-    for (const Movie& m : movies) {
-        if (m.getId() == id) {
-            m.display(); 
-            return;
-        }
+    auto it = find_if(movies.begin(), movies.end(), 
+                      [id](const Movie& m) { return m.getId() == id; });
+
+    if (it != movies.end()) {
+        it->display();
     }
 }

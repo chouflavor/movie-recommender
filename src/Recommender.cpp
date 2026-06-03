@@ -28,9 +28,9 @@ int Recommender::Similaritycalculate(int userA, int userB) const {
         }
     }
 
-    if (commonCount == 0) return -9999;
+    if (commonCount == 0) return NO_COMMON_MOVIES_PENALTY;
 
-    return (commonCount * 10) - static_cast<int>(diffSum);
+    return (commonCount * COMMON_MOVIE_WEIGHT) - static_cast<int>(diffSum);
 }
 
 
@@ -56,10 +56,10 @@ vector<int> Recommender::recommend(int targetUserId, int K, int N) const {
     
     vector<pair<int, int>> similarities;
     for (int otherUser : allUsers) {
-        if (otherUser == targetUserId) continue; // 나 자신은 스킵
+        if (otherUser == targetUserId) continue; 
         
         int simScore = Similaritycalculate(targetUserId, otherUser);
-        if (simScore > -9999) { 
+        if (simScore > NO_COMMON_MOVIES_PENALTY) { 
             similarities.push_back({simScore, otherUser});
         }
     }

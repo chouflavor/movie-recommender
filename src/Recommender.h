@@ -7,6 +7,9 @@ private:
     const RatingManager& ratingMgr;
 
 public:
+    static constexpr int NO_COMMON_MOVIES_PENALTY = -9999;
+    static constexpr int COMMON_MOVIE_WEIGHT = 10;
+    
     Recommender(const RatingManager& rm) 
         : ratingMgr(rm) {}
 

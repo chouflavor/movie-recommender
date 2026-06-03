@@ -11,6 +11,9 @@ private:
     double totalRating;    
     int ratingCount; 
 
+    static constexpr int MIN_VALID_YEAR = 1888;
+    static constexpr int MAX_VALID_YEAR = 2100;
+
 public:  
     Movie();               
     Movie(int id, const std::string& title, const std::string& genre, int year);

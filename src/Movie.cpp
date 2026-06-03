@@ -45,7 +45,7 @@ void Movie::display() const {
 }
 
 void Movie::setYear(int year) {
-    if (year >= 1888 && year <= 2100) {
+    if (year >= MIN_VALID_YEAR && year <= MAX_VALID_YEAR) {
         releaseYear = year;
     } 
     else {

@@ -16,11 +16,16 @@ void MovieSystem::printMenu() const {
     cout << "\n[ 평점 관리 ]\n";
     cout << " 7. 평점 입력\n 8. 영화별 평점 보기\n";
 
-    cout << "\n[추천 시스템]\n";
+    cout << "\n[ 추천 시스템 ]\n";
     cout << " 9. 맞춤 영화 추천 \n";
+
+    cout << "\n[ 통계 ]\n";
+    cout << " 10. 통계 보기 \n";
     
     cout << "\n 0. 프로그램 종료\n";
     cout << "\n 선택 > ";
+
+
 }
 void MovieSystem::loadAllData() {
     movieMgr.loadFromFile("data/movies.csv");
@@ -113,7 +118,8 @@ void MovieSystem::run(){
             case 6: userMgr.printAllUsers(); break;
             case 7: processAddRating(); break;        
             case 8: ratingMgr.printRatingsByMovie(); break;
-            case 9: processRecommendation(); break;    
+            case 9: processRecommendation(); break;
+            case 10: showStatisticsMenu(); break;    
             case 0: 
                 cout << "프로그램을 종료합니다.\n";
                 saveAllData();                         

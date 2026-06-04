@@ -40,7 +40,7 @@ void UserManager::printAllUsers() const{
 
 void UserManager::loadFromFile(const string& filename) {
     ifstream fin(filename);
-    if (!fin.is_open()) return; // 파일 없으면 패스
+    if (!fin.is_open()) return; 
     string line;
     while (getline(fin, line)) {
         if (line.empty()) continue;

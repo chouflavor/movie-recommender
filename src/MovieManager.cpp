@@ -82,7 +82,6 @@ void MovieManager::searchByTitle() const {
         }
     }
 
-    // 4. 결과 출력
     if (!found) {
         cout << "검색 결과가 없습니다." << endl; 
     } else {
@@ -225,7 +224,7 @@ std::map<std::string, double> MovieManager::getAverageRatingByGenre() const {
     std::map<std::string, int>    countByGenre;
 
     for (const auto& movie : movies) {
-        sumByGenre[movie.getGenre()] += movie.getAverageRating(); // 기존 프로젝트 메서드명 반영
+        sumByGenre[movie.getGenre()] += movie.getAverageRating(); 
         countByGenre[movie.getGenre()]++;
     }
 

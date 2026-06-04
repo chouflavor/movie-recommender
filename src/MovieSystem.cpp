@@ -137,6 +137,7 @@ void MovieSystem::processSortMenu() {
         cout << "잘못된 입력입니다.\n";
         return;
     }
+    cin.ignore(1000, '\n');
 
     if (choice >= 1 && choice <= 3) {
         movieMgr.printSortedMovies(choice);
@@ -144,7 +145,15 @@ void MovieSystem::processSortMenu() {
         cout << "1~3 사이의 옵션을 선택해주세요.\n";
     }
 }
+void MovieSystem::waitAndClear() const {
+    cout << "\n[ 메인 메뉴로 돌아가려면 엔터(Enter) 키를 누르세요 ]";
+    
+    cin.get(); 
+    
+    system("clear"); 
+}
 void MovieSystem::run(){
+    system("clear");
     loadAllData(); 
 
     int choice = -1;
@@ -156,25 +165,27 @@ void MovieSystem::run(){
         if(cin.fail()){
             cin.clear();
             cin.ignore(1000, '\n');
+            system("clear");
             choice = -1;
         }
-        
+        cin.ignore(1000, '\n');
+
         switch (choice){
-            case 1: movieMgr.addMovie(); break; 
-            case 2: movieMgr.searchByTitle(); break;
-            case 3: movieMgr.printAllMovies(); break;
-            case 4: processSortMenu(); break;
-            case 5: userMgr.addUser(); break;
-            case 6: userMgr.printAllUsers(); break;
-            case 7: processAddRating(); break;        
-            case 8: ratingMgr.printRatingsByMovie(); break;
-            case 9: processRecommendation(); break;
-            case 10: showStatisticsMenu(); break;    
+            case 1: movieMgr.addMovie(); waitAndClear(); break; 
+            case 2: movieMgr.searchByTitle(); waitAndClear(); break;
+            case 3: movieMgr.printAllMovies(); waitAndClear(); break;
+            case 4: processSortMenu(); waitAndClear(); break;
+            case 5: userMgr.addUser(); waitAndClear(); break;
+            case 6: userMgr.printAllUsers(); waitAndClear(); break;
+            case 7: processAddRating(); waitAndClear(); break;        
+            case 8: ratingMgr.printRatingsByMovie(); waitAndClear(); break;
+            case 9: processRecommendation(); waitAndClear(); break;
+            case 10: showStatisticsMenu(); waitAndClear();break;    
             case 0: 
                 cout << "프로그램을 종료합니다.\n";
                 saveAllData();                         
                 break;
-            default: cout << "잘못된 입력\n";
+            default: cout << "잘못된 입력\n"; waitAndClear(); break;
         }
     }
 }

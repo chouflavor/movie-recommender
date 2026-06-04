@@ -2,6 +2,7 @@
 #include "MovieManager.h"
 #include "RatingManager.h"
 #include "UserManager.h"
+#include <cstdlib>
 
 class MovieSystem{
 private:
@@ -15,7 +16,8 @@ private:
     void processRecommendation();
     void showStatisticsMenu();
     void processSortMenu();
-    
+    void waitAndClear() const;
+
 public:
     void printMenu() const;
     void run();

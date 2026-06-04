@@ -6,6 +6,9 @@
 #include <sstream>
 #include <stdexcept>
 #include <numeric>
+#include <algorithm> 
+#include <cctype>    
+#include <vector>
 
 using namespace std;
 
@@ -45,7 +48,7 @@ void MovieManager::printAllMovies() const{
     cout << "총 " << movies.size() << "편" << endl;
 }
 
-void MovieManager::searchByTitle() const{
+void MovieManager::searchByTitle() const {
     cout << "\n--- [ 제목으로 검색 ] ---\n";
 
     if(movies.empty()) {
@@ -54,21 +57,39 @@ void MovieManager::searchByTitle() const{
     }
 
     string keyword;
-    cin.ignore();
-    cout << "검색할 정확한 제목 입력: ";
+
+    cout << "검색할 영화 제목의 일부를 입력: "; 
     getline(cin, keyword);
 
-    auto it = find_if(movies.begin(), movies.end(), 
-                      [&keyword](const Movie& m) { return m.getTitle() == keyword; });
+    string lowerKeyword = keyword;
+    transform(lowerKeyword.begin(), lowerKeyword.end(), lowerKeyword.begin(), ::tolower);
 
-    if (it != movies.end()) {
-        it->display(); 
-    } else {
+    bool found = false; 
+    int matchCount = 0; 
+
+    for (const auto& m : movies) {
+        string lowerTitle = m.getTitle();
+        transform(lowerTitle.begin(), lowerTitle.end(), lowerTitle.begin(), ::tolower);
+
+        if (lowerTitle.find(lowerKeyword) != string::npos) {
+            if (!found) {
+                cout << "\n=== 검색 결과 ===\n";
+                found = true;
+            }
+            m.display(); 
+            cout << "------------------------\n";
+            matchCount++;
+        }
+    }
+
+    // 4. 결과 출력
+    if (!found) {
         cout << "검색 결과가 없습니다." << endl; 
+    } else {
+        cout << "총 " << matchCount << "건의 영화를 찾았습니다.\n";
     }
 }
 
-// 기존 printSortedByRating() 함수를 아래 코드로 대체합니다.
 void MovieManager::printSortedMovies(int sortOption) const {
     if(movies.empty()) {
         cout << "등록된 영화가 없습니다." << endl;

@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <stdexcept>
+#include <numeric>
 
 using namespace std;
 
@@ -163,4 +164,47 @@ std::vector<Movie> MovieManager::filterByGenre(const std::string& genre) const {
         }
     }
     return result;
+}
+
+double MovieManager::getAverageRating() const {
+
+    if (movies.empty()) {
+        throw std::runtime_error("영화 데이터가 없습니다.");
+    }
+
+    double sum = std::accumulate(
+        movies.begin(), movies.end(), 0.0,
+        [](double acc, const Movie& m) {
+            return acc + m.getAverageRating(); 
+        }
+    );
+
+    return sum / movies.size();
+}
+
+std::map<std::string, double> MovieManager::getAverageRatingByGenre() const {
+    std::map<std::string, double> sumByGenre;
+    std::map<std::string, int>    countByGenre;
+
+    for (const auto& movie : movies) {
+        sumByGenre[movie.getGenre()] += movie.getAverageRating(); // 기존 프로젝트 메서드명 반영
+        countByGenre[movie.getGenre()]++;
+    }
+
+    std::map<std::string, double> avgByGenre;
+    
+    for (const auto& [genre, sum] : sumByGenre) { 
+        avgByGenre[genre] = sum / countByGenre[genre];
+    }
+    
+    return avgByGenre;
+}
+
+std::vector<Movie> MovieManager::getTopN(int n) const{
+    auto sorted = movies;
+
+    std::sort(sorted.begin(), sorted.end(),
+        [](const Movie& a, const Movie& b) {
+            return a.getAverageRating() > b.getAverageRating();
+        });
 }

@@ -3,6 +3,7 @@
 #include <string>
 #include "Movie.h"
 #include "BaseManager.h"
+#include <map>
 
 class MovieManager : public BaseManager{
 private:    
@@ -14,6 +15,9 @@ public:
     void printSortedByRating() const;
     void addRatingToMovie(int mId, double score);
 
+    double getAverageRating() const;
+    std::map<std::string, double> getAverageRatingByGenre() const;
+    std::vector<Movie> getTopN(int n) const;
 
     void loadFromFile(const std::string& filename) override;
     void saveToFile(const std::string& filename) const override;

@@ -64,6 +64,31 @@ void MovieSystem::processRecommendation() {
         }
     }
 }
+
+void MovieSystem::showStatisticsMenu(){
+    while(true){
+        cout << "\n=== 통계 메뉴 ===\n";
+        cout << "1. 전체 평균 평점\n";
+        cout << "2. 장르별 평균 평점\n";
+        cout << "3. Top 10 영화\n";
+        cout << "0. 돌아가기\n";
+
+        int choice;
+        cin >> choice;
+
+        try{
+            switch (choice){
+                case 1: movieMgr.getAverageRating(); break;
+                case 2: movieMgr.getAverageRatingByGenre(); break;
+                case 3: movieMgr.getTopN(10); break;
+                case 0: return;
+                default: cout << "잘못된 선택\n";
+            }
+        }catch (const std::exception& e){
+            cerr << "오류: " << e.what() << "\n";
+        }
+    }
+}
 void MovieSystem::run(){
     loadAllData(); 
 

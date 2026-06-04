@@ -13,6 +13,7 @@ private:
     void saveAllData() const;
     void processAddRating();
     void processRecommendation();
+    void showStatisticsMenu();
     
 public:
     void printMenu() const;

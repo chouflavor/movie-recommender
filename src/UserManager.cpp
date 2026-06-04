@@ -11,8 +11,6 @@ void UserManager::addUser(){
 
     string name, mail;
 
-    cin.ignore();
-
     cout << "이름: ";
     getline(cin, name);
 

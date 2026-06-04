@@ -18,8 +18,6 @@ void MovieManager::addMovie(){
     int year;
     string title, genre;
 
-    cin.ignore();
-
     cout << "제목: ";
     getline(cin, title);
 
@@ -69,7 +67,8 @@ void MovieManager::searchByTitle() const {
 
     for (const auto& m : movies) {
         string lowerTitle = m.getTitle();
-        transform(lowerTitle.begin(), lowerTitle.end(), lowerTitle.begin(), ::tolower);
+        transform(lowerTitle.begin(), lowerTitle.end(), lowerTitle.begin(), 
+          [](unsigned char c){ return std::tolower(c); });
 
         if (lowerTitle.find(lowerKeyword) != string::npos) {
             if (!found) {

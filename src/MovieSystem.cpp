@@ -147,9 +147,9 @@ void MovieSystem::processSortMenu() {
 }
 void MovieSystem::waitAndClear() const {
     cout << "\n[ 메인 메뉴로 돌아가려면 엔터(Enter) 키를 누르세요 ]";
-    
+    cin.clear();
+    cin.ignore(1000, '\n'); 
     cin.get(); 
-    
     system("clear"); 
 }
 void MovieSystem::run(){

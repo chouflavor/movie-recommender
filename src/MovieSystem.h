@@ -14,6 +14,7 @@ private:
     void processAddRating();
     void processRecommendation();
     void showStatisticsMenu();
+    void processSortMenu();
     
 public:
     void printMenu() const;

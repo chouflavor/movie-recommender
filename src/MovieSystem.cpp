@@ -8,7 +8,7 @@ void MovieSystem::printMenu() const {
     cout << "\n=== Movie Recommender ===\n";
     
     cout << "\n[ 영화 관리 ]\n";
-    cout << " 1. 영화 추가\n 2. 제목으로 검색\n 3. 전체 목록 출력\n 4. 평점순 정렬 출력\n";
+    cout << " 1. 영화 추가\n 2. 제목으로 검색\n 3. 전체 목록 출력\n 4. 영화 목록 정렬 출력\n";
     
     cout << "\n[ 사용자 관리 ]\n";
     cout << " 5. 사용자 추가\n 6. 사용자 목록 출력\n";
@@ -121,6 +121,29 @@ void MovieSystem::showStatisticsMenu(){
         }
     }
 }
+void MovieSystem::processSortMenu() {
+    cout << "\n=== 정렬 옵션 ===\n";
+    cout << "1. 평점 높은 순\n";
+    cout << "2. 제목 가나다 순\n";
+    cout << "3. 최신 개봉 순\n";
+    cout << "선택 > ";
+    
+    int choice;
+    cin >> choice;
+
+    if(cin.fail()) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "잘못된 입력입니다.\n";
+        return;
+    }
+
+    if (choice >= 1 && choice <= 3) {
+        movieMgr.printSortedMovies(choice);
+    } else {
+        cout << "1~3 사이의 옵션을 선택해주세요.\n";
+    }
+}
 void MovieSystem::run(){
     loadAllData(); 
 
@@ -140,7 +163,7 @@ void MovieSystem::run(){
             case 1: movieMgr.addMovie(); break; 
             case 2: movieMgr.searchByTitle(); break;
             case 3: movieMgr.printAllMovies(); break;
-            case 4: movieMgr.printSortedByRating(); break;
+            case 4: processSortMenu(); break;
             case 5: userMgr.addUser(); break;
             case 6: userMgr.printAllUsers(); break;
             case 7: processAddRating(); break;        

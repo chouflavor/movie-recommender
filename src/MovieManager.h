@@ -12,7 +12,7 @@ public:
     void addMovie();
     void printAllMovies() const;
     void searchByTitle() const;
-    void printSortedByRating() const;
+    void printSortedMovies(int sortOption) const;
     void addRatingToMovie(int mId, double score);
 
     double getAverageRating() const;

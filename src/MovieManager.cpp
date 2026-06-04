@@ -68,20 +68,37 @@ void MovieManager::searchByTitle() const{
     }
 }
 
-void MovieManager::printSortedByRating() const {
-    cout << "\n--- [ 평점순 영화 목록 ] ---\n";
+// 기존 printSortedByRating() 함수를 아래 코드로 대체합니다.
+void MovieManager::printSortedMovies(int sortOption) const {
     if(movies.empty()) {
         cout << "등록된 영화가 없습니다." << endl;
         return;
     }
 
-
     vector<Movie> sortedMovies = movies;
 
-    sort(sortedMovies.begin(), sortedMovies.end(), [](const Movie& a, const Movie& b) {
-        return a.getAverageRating() > b.getAverageRating();
-    });
+    switch(sortOption) {
+        case 1: // 평점순 (내림차순)
+            sort(sortedMovies.begin(), sortedMovies.end(), [](const Movie& a, const Movie& b) {
+                return a.getAverageRating() > b.getAverageRating();
+            });
+            break;
+        case 2: // 가나다순 (오름차순)
+            sort(sortedMovies.begin(), sortedMovies.end(), [](const Movie& a, const Movie& b) {
+                return a.getTitle() < b.getTitle();
+            });
+            break;
+        case 3: // 최신순 (내림차순)
+            sort(sortedMovies.begin(), sortedMovies.end(), [](const Movie& a, const Movie& b) {
+                return a.getYear() > b.getYear();
+            });
+            break;
+        default:
+            cout << "잘못된 선택입니다." << endl;
+            return;
+    }
 
+    cout << "\n--- [ 정렬된 영화 목록 ] ---\n";
     for (const Movie& m : sortedMovies) {
         m.display();
     }

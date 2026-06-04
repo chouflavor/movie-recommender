@@ -9,8 +9,7 @@ private:
     const RatingManager& ratingMgr;
 
 public:
-    static constexpr int NO_COMMON_MOVIES_PENALTY = -9999;
-    static constexpr int COMMON_MOVIE_WEIGHT = 10;
+    static constexpr double NO_COMMON_MOVIES_PENALTY = -2.0;
     
     Recommender(const RatingManager& rm) 
         : ratingMgr(rm) {}
@@ -18,5 +17,5 @@ public:
     std::vector<int> recommend(int targetUserId, const MovieManager& movieMgr, const std::string& genre = "", int K = 3, int N = 3) const;
 
 private:
-    int Similaritycalculate(int userA, int userB) const;
+    double Similaritycalculate(int userA, int userB) const;
 };

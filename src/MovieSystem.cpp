@@ -45,12 +45,18 @@ void MovieSystem::processRecommendation() {
     int targetId;
     cout << "추천을 받을 유저 ID를 입력하세요: ";
     cin >> targetId;
+    
+    cin.ignore(); 
+    string genre;
+    cout << "선호하는 장르를 입력하세요 (전체 추천은 엔터): ";
+    getline(cin, genre);
+
     Recommender rec(ratingMgr);
 
-    vector<int> recommended = rec.recommend(targetId);
+    vector<int> recommended = rec.recommend(targetId, movieMgr, genre);
 
     if (recommended.empty()) {
-        cout << "데이터가 부족하여 추천할 영화가 없습니다." << endl;
+        cout << "데이터가 부족하거나 조건에 맞는 추천 영화가 없습니다." << endl;
     } else {
         cout << "[" << targetId << "]님의 추천 영화 " << recommended.size() << "편 추천:\n";
         for (int mId : recommended) {

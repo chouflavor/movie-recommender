@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+#include <string>
 #include "RatingManager.h"
+#include "MovieManager.h"
 
 class Recommender {
 private:
@@ -13,7 +15,7 @@ public:
     Recommender(const RatingManager& rm) 
         : ratingMgr(rm) {}
 
-    std::vector<int> recommend(int targetUserId, int K = 3, int N = 3) const;
+    std::vector<int> recommend(int targetUserId, const MovieManager& movieMgr, const std::string& genre = "", int K = 3, int N = 3) const;
 
 private:
     int Similaritycalculate(int userA, int userB) const;

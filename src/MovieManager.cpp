@@ -155,3 +155,12 @@ void MovieManager::printMovieById(int id) const {
         it->display();
     }
 }
+std::vector<Movie> MovieManager::filterByGenre(const std::string& genre) const {
+    std::vector<Movie> result;
+    for (const auto& movie : movies) {
+        if (movie.getGenre() == genre) {
+            result.push_back(movie);
+        }
+    }
+    return result;
+}

@@ -207,4 +207,9 @@ std::vector<Movie> MovieManager::getTopN(int n) const{
         [](const Movie& a, const Movie& b) {
             return a.getAverageRating() > b.getAverageRating();
         });
+    if (n > static_cast<int>(sorted.size())){
+        n = sorted.size();
+    }
+    return std::vector<Movie>(sorted.begin(), sorted.begin() + n);
+    
 }

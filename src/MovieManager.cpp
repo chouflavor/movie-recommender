@@ -123,16 +123,19 @@ void MovieManager::printSortedMovies(int sortOption) const {
     }
     cout << "총 " << sortedMovies.size() << "편" << endl;
 }
-void MovieManager::addRatingToMovie(int mId, double score) {
+bool MovieManager::addRatingToMovie(int mId, double score) {
     auto it = find_if(movies.begin(), movies.end(), 
                       [mId](const Movie& m) { return m.getId() == mId; });
 
     if (it != movies.end()) {
         it->addRating(score); 
+        return true; 
     } else {
         cout << "ID가 " << mId << "인 영화를 찾을 수 없음." << endl;
+        return false; 
     }
 }
+
 
 void MovieManager::loadFromFile(const string& filename) {
     ifstream fin(filename);

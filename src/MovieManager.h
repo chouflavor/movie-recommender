@@ -13,7 +13,7 @@ public:
     void printAllMovies() const;
     void searchByTitle() const;
     void printSortedMovies(int sortOption) const;
-    void addRatingToMovie(int mId, double score);
+    bool addRatingToMovie(int mId, double score);
 
     double getAverageRating() const;
     std::map<std::string, double> getAverageRatingByGenre() const;

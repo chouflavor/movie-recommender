@@ -81,11 +81,38 @@ void MovieSystem::showStatisticsMenu(){
         int choice;
         cin >> choice;
 
+        if(cin.fail()){
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "잘못된 입력입니다. 숫자를 입력해주세요.\n";
+            continue; 
+        }
+
         try{
             switch (choice){
-                case 1: movieMgr.getAverageRating(); break;
-                case 2: movieMgr.getAverageRatingByGenre(); break;
-                case 3: movieMgr.getTopN(10); break;
+                case 1: {
+                    double avg = movieMgr.getAverageRating();
+                    cout << "\n[ 전체 평균 평점 ]: " << avg << "점\n";
+                    break;
+                }
+                case 2: {
+                    auto avgByGenre = movieMgr.getAverageRatingByGenre();
+                    cout << "\n[ 장르별 평균 평점 ]\n";
+                    for(const auto& pair : avgByGenre) {
+                        cout << "- " << pair.first << ": " << pair.second << "점\n";
+                    }
+                    break;
+                }
+                case 3: {
+                    auto top10 = movieMgr.getTopN(10);
+                    cout << "\n[ Top 10 영화 ]\n";
+                    int rank = 1;
+                    for(const auto& movie : top10) {
+                        cout << rank++ << "위: ";
+                        movie.display();
+                    }
+                    break;
+                }
                 case 0: return;
                 default: cout << "잘못된 선택\n";
             }

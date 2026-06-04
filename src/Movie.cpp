@@ -6,7 +6,7 @@ using namespace std;
 Movie::Movie(): id(0), releaseYear(0), totalRating(0.0), ratingCount(0){}
 
 Movie::Movie(int id, const std::string& title,const std::string& genre, int year): 
-    id(id), title(title), genre(genre), totalRating(0.0), ratingCount(0) {
+    id(id),releaseYear(0), title(title), genre(genre), totalRating(0.0), ratingCount(0) {
         setYear(year);
     }
 
